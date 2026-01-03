@@ -5,9 +5,6 @@ of six d20s with the maximum value taken
 import matplotlib.pyplot as plt
 import numpy as np
 
-from matplotlib import colors
-from matplotlib.ticker import PercentFormatter
-
 from n_dice_monte import sim_max
 from n_dice_monte import histogram
 
