@@ -13,10 +13,12 @@ class Dice(object):
     """
 
     dice_size = 20
+    min_face = 1
 
 
-    def __init__(self, dice_size = 20):
+    def __init__(self, dice_size = 20, min_face = 1):
         self.dice_size = dice_size
+        self.min_face = min_face
 
     def roll(self, dice_pool = 1):
         """
@@ -34,10 +36,10 @@ class Dice(object):
         """
         roll a pool of dice, and return only the highest value among them
         """
-        high_roll = 0
+        high_roll = -1
 
         for _ in range(dice_pool):
-            roll = random.randint(1, self.dice_size)
+            roll = random.randint(self.min_face, self.dice_size)
             high_roll = max(high_roll, roll)
 
         return high_roll
@@ -46,10 +48,13 @@ class Dice(object):
         """
         roll a pool of dice and return only the lowest value among them
         """
-        low_roll = self.dice_size
+        low_roll = -1
 
         for _ in range(dice_pool):
-            roll = random.randint(1, self.dice_size)
-            low_roll = min(low_roll,roll)
+            roll = random.randint(self.min_face, self.dice_size)
+            if low_roll == -1:
+                low_roll = roll
+            else:
+                low_roll = min(low_roll,roll)
 
         return low_roll
