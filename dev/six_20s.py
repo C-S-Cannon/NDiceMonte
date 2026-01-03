@@ -3,16 +3,28 @@ create a histogram showing the distribution of the maximum value pools
 of six d20s with the maximum value taken
 """
 import matplotlib.pyplot as plt
+import numpy as np
+
+from matplotlib import colors
+from matplotlib.ticker import PercentFormatter
 
 from n_dice_monte import sim_max
 from n_dice_monte import histogram
 
 DICE_FACE = 20
+DICE_POOL = 6
 
-sim_arr = sim_max(DICE_FACE, 6, 500)
+sim_arr = sim_max(DICE_FACE, DICE_POOL, 5000000)
+avg = np.mean(sim_arr)
 
 ax = plt.subplot()
 
-ax = histogram(sim_arr, DICE_FACE)
+ax.legend(title="Mean is {:.2f}".format(avg), loc='upper left', reverse=True)
+ax.set_title('6d20 Maxpool Distribution')
+ax.set_xlabel('Dice Value')
+ax.set_ylabel('Chance')
 
-plt.show()
+ax = histogram(sim_arr, DICE_FACE)
+#ax.yaxis.set_major_formatter(PercentFormatter(xmax=1))
+
+plt.savefig("./dev/six_20s.jpg")
