@@ -1,12 +1,12 @@
 """
-creating a histogram showing the distribution of the maximum value pools of six d20s with the maximum value taken
+create a histogram showing the distribution of the maximum value pools
+of six d20s with the maximum value taken
 """
 
-from NDiceMonte import sim_max
-from NDiceMonte import histogram
+from NDiceMonte import sim_arr, histogram
 
-dice_face = 20
+DICE_FACE = 20
 
-sim_arr = sim_max(dice_face, 6, 500)
+sim_arr = sim_max(DICE_FACE, 6, 500)
 
-histogram(sim_arr, dice_face)
+histogram(sim_arr, DICE_FACE)
