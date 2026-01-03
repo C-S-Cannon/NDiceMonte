@@ -2,7 +2,6 @@
 a collection of functions to allow the creation of data sets for dice
 """
 
-import random
 import numpy as np
 
 from .dice import Dice

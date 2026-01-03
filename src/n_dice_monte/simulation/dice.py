@@ -36,7 +36,7 @@ class Dice(object):
         """
         high_roll = 0
 
-        for x in range(dice_pool):
+        for _ in range(dice_pool):
             roll = random.randint(1, self.dice_size)
             high_roll = max(high_roll, roll)
 
@@ -48,7 +48,7 @@ class Dice(object):
         """
         low_roll = self.dice_size
 
-        for x in range(dice_pool):
+        for _ in range(dice_pool):
             roll = random.randint(1, self.dice_size)
             low_roll = min(low_roll,roll)
 
