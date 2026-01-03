@@ -12,11 +12,11 @@ class Dice(object):
     A basic class for dice objects to enable rolling in multiple modes.
     """
 
-    size = 20
+    dice_size = 20
 
 
-    def __init__(self, size = 20):
-        self.size = size
+    def __init__(self, dice_size = 20):
+        self.dice_size = dice_size
 
     def roll(self, dice_pool = 1):
         """
@@ -26,7 +26,7 @@ class Dice(object):
         results = np.array(dice_pool) #construct array to hold dice pool results
 
         for x in range(dice_pool): #fill dice pool
-            results[x] = random.randint(1,self.size)
+            results[x] = random.randint(1,self.dice_size)
 
             return results
 
@@ -37,7 +37,7 @@ class Dice(object):
         high_roll = 0
 
         for x in range(dice_pool):
-            roll = random.randint(1, self.size)
+            roll = random.randint(1, self.dice_size)
             high_roll = max(high_roll, roll)
 
         return high_roll
@@ -46,10 +46,10 @@ class Dice(object):
         """
         roll a pool of dice and return only the lowest value among them
         """
-        low_roll = self.size
+        low_roll = self.dice_size
 
         for x in range(dice_pool):
-            roll = random.randint(1, self.size)
+            roll = random.randint(1, self.dice_size)
             low_roll = min(low_roll,roll)
 
         return low_roll
