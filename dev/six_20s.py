@@ -2,7 +2,7 @@
 create a histogram showing the distribution of the maximum value pools
 of six d20s with the maximum value taken
 """
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 from n_dice_monte import sim_max
 from n_dice_monte import histogram
