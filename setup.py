@@ -26,7 +26,7 @@ setup(
     # What is the runPEPS command in use at the above line?
 
     # ***requirements***
-    python_requires='>=3.5',
+    python_requires='>=3.13',
     # required version of python is 3.3 or greater as defined in PEP 440
     # necessary since this is a namespace package and 2.7 is EOL
     setup_requires=[],

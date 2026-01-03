@@ -2,8 +2,8 @@
 creating a histogram showing the distribution of the maximum value pools of six d20s with the maximum value taken
 """
 
-from src.n_dice_monte import sim_max
-from src.n_dice_monte import histogram
+from NDiceMonte import sim_max
+from NDiceMonte import histogram
 
 dice_face = 20
 
