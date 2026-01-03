@@ -2,10 +2,10 @@
 basic graphing functions for 2d representations
 """
 
-import matplotlib as mpl
+import matplotlib.pyplot as plt
 import numpy as np
 
-def histogram( sim_data, dice_size, sim_width = 1, hist_color='b'):
+def histogram( sim_data, dice_size, sim_width = 1):
     """
     creation of a 2d histogram for visualizing dice results
     """
@@ -15,4 +15,5 @@ def histogram( sim_data, dice_size, sim_width = 1, hist_color='b'):
     else:
         parsed_data = np.zeros(sim_data.size)
 
-    mpl.pyplot.hist(parsed_data, dice_size, [1, dice_size], density=True, color=hist_color)
+    #generate a single histogram
+    return plt.hist(parsed_data, dice_size, [1, dice_size], density=True)
