@@ -13,6 +13,6 @@ def histogram( sim_data, dice_size, sim_width = 1, hist_color='b'):
     if sim_width == 1:
         parsed_data = sim_data
     else:
-        parsed_data = np.array(sim_data.size)
+        parsed_data = np.zeros(sim_data.size)
 
     mpl.pyplot.hist(parsed_data, dice_size, [1, dice_size], density=True, color=hist_color)
