@@ -14,14 +14,15 @@ DICE_SIZE = 6
 sim_arr = sim_max(SIM_SIZE, DICE_SIZE)
 avg = np.mean(sim_arr)
 
-ax = plt.subplot()
-
-ax.legend(title="Mean is {:.2f}".format(avg), loc='upper left', reverse=True)
-ax.set_title('Basic d6 distribution')
-ax.set_xlabel('Dice Value')
-ax.set_ylabel('Chance')
+fig, ax = plt.subplots()
 
 ax = histogram(sim_arr, DICE_SIZE)
-#ax.yaxis.set_major_formatter(PercentFormatter(xmax=1))
+ax.legend(title="Mean is {:.2f}".format(avg), loc='upper left', reverse=True)
+ax.set_title('Basic d6 distribution')
 
-plt.savefig("./dev/d6_basic.jpg")
+plt.show()
+#plt.savefig("./dev/d6_basic.jpg")
+
+#bins = np.arange(1,DICE_SIZE+2, dtype=int)-0.5
+#print("array bins are")
+#print(bins)
