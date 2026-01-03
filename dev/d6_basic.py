@@ -22,7 +22,3 @@ ax.set_title('Basic d6 distribution')
 
 plt.show()
 #plt.savefig("./dev/d6_basic.jpg")
-
-#bins = np.arange(1,DICE_SIZE+2, dtype=int)-0.5
-#print("array bins are")
-#print(bins)
