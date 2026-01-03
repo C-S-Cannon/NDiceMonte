@@ -3,4 +3,5 @@
 from .graphing import histogram
 from .simulation import sim_max
 
+__version__ = '0.0a0'
 _AUTHOR_= 'Sphinx'
