@@ -7,12 +7,12 @@ import numpy as np
 from .dice import Dice
 
 
-def sim_max(dice_size, pool_size, sim_size):
+def sim_max(sim_size, dice_size, pool_size=1, mface=1):
     """
     create an array holding of the max value rolled for a pool of dice across some arbitrary size
     """
 
-    dice = Dice(dice_size)
+    dice = Dice(dice_size, min_face=mface)
     sim_arr = np.zeros(sim_size)
 
     for x in range(sim_size):
