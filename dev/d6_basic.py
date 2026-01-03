@@ -11,21 +11,20 @@ from matplotlib.ticker import PercentFormatter
 from n_dice_monte import sim_max
 from n_dice_monte import histogram
 
-SIM_SIZE = 500
-DICE_FACE = 20
-DICE_POOL = 6
+SIM_SIZE = 5000
+DICE_SIZE = 6
 
-sim_arr = sim_max(SIM_SIZE, DICE_FACE, DICE_POOL)
+sim_arr = sim_max(SIM_SIZE, DICE_SIZE)
 avg = np.mean(sim_arr)
 
 ax = plt.subplot()
 
 ax.legend(title="Mean is {:.2f}".format(avg), loc='upper left', reverse=True)
-ax.set_title('6d20 Maxpool Distribution')
+ax.set_title('Basic d6 distribution')
 ax.set_xlabel('Dice Value')
 ax.set_ylabel('Chance')
 
-ax = histogram(sim_arr, DICE_FACE)
+ax = histogram(sim_arr, DICE_SIZE)
 #ax.yaxis.set_major_formatter(PercentFormatter(xmax=1))
 
-plt.savefig("./dev/six_20s.jpg")
+plt.savefig("./dev/d6_basic.jpg")
