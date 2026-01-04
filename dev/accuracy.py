@@ -30,7 +30,7 @@ names = ["1d6 accuracy, AM={:.2f}".format(avg[0]),
 
 fig, ax = plt.subplots()
 
-ax = histogram(d6_sim, (D6_SIZE), colors=colors, name=names)
+ax = histogram(np.transpose(d6_sim), (D6_SIZE),style='bar', colors=colors, name=names)
 ax.legend(loc='upper left', reverse=True)
 ax.set_title('Distribution of Accuracy')
 
