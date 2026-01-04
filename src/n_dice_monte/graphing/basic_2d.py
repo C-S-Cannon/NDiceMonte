@@ -14,7 +14,7 @@ def major_ticks(max_val):
     tick_count = 0
     if max_val<=6:
         tick_count = max_val
-    elif max_val<=20:
+    elif max_val<=30:
         tick_count = max_val/2
     elif max_val <=50:
         tick_count = max_val/5
@@ -53,9 +53,9 @@ def histogram( sim_data, max_val, min_val=1, style='stepfilled',
     _fig, ax = plt.subplots()
 
     #generate a single histogram
-    _n, _bins, _patches = ax.hist(sim_data, bins=np.arange(min_val,max_val+2, dtype=int)-0.5,
-        range=[min_val, max_val], density=True, histtype=style, color=colors,
-        stacked=stack, label=name)
+    _n, _bins, _patches = ax.hist(sim_data,
+        bins=np.arange(min_val,max_val+2, dtype=int)-0.5, range=[min_val, max_val],
+        density=True, histtype=style, color=colors, stacked=stack, label=name)
 
 
     ax.set_xlabel('Roll Value')
@@ -64,12 +64,37 @@ def histogram( sim_data, max_val, min_val=1, style='stepfilled',
     #convert y axis to display as a percentage chance rather than norm from 1
     ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1))
 
-    #previous method of setting x ticks
-    #ax.xaxis.set_major_locator(ticker.MaxNLocator(
-    #        nbins=max_val, integer=True, steps=[1, 2, 4, 5, 10]))
-    #ax.xaxis.set_minor_locator(ticker.MultipleLocator(base=1))
-
     #set x axis tick locations and values
+    ax.set_xticks(major_ticks(max_val))
+    ax.set_xticks(minor_ticks(max_val), minor=True)
+
+    return ax
+
+def layer_hist(sim_data, max_val, min_val=1, style='stepfilled',
+    colors=('xkcd:cerulean',), stack=False, name=("",)):
+    """
+    creation of a 2d histogram for visualizing dice results
+
+    sim_data is input data, max_val is the maximum value a group of data can be,
+    min_val is the minimum value, sim_width is how many dice per simulation pool,
+    colors are xkcd color names, stack and style are graph settings
+    """
+    _fig, ax = plt.subplots()
+
+    #iterate once for each row in data array
+    for x in range(np.shape(sim_data)[0]):
+        #generate a 2d layered histogram
+        _n, _bins, _patches = ax.hist(np.flip(sim_data, axis=0)[x],
+        bins=np.arange(min_val,max_val+2, dtype=int)-0.5, range=[min_val, max_val], density=True,
+        histtype=style, color=np.flip(colors)[x], stacked=stack, label=np.flip(name)[x])
+
+
+    ax.set_xlabel('Roll Value')
+    ax.set_ylabel('Chance')
+
+    #convert y axis to display as a percentage chance rather than norm from 1
+    ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1))
+
     ax.set_xticks(major_ticks(max_val))
     ax.set_xticks(minor_ticks(max_val), minor=True)
 
