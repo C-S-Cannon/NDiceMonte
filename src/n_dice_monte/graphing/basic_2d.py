@@ -130,3 +130,19 @@ def xqrt_plot(sim_data, max_val, min_val=1, name=("",)):
     ax.set_xticks(minor_ticks(max_val, min_val), minor=True)
 
     return ax
+
+def xbox_plot(sim_data, max_val, min_val=1, name=("",)):
+    """
+    a box and whisker plot with values ranging along the x axis
+    """
+
+    _fig, ax = plt.subplots()
+
+    #generate boxplot
+    ax.boxplot(sim_data, sym='', orientation='horizontal')
+
+    #set x ticks
+    ax.set_xticks(major_ticks(max_val))
+    ax.set_xticks(minor_ticks(max_val, min_val), minor=True)
+
+    return ax

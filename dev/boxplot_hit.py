@@ -1,15 +1,15 @@
 """
-create an errorplot showing the the mean on the x axis with the quartiles as error bars and
-the simulation label on the y axis
+create a boxplot showing the a mean/quartile distribution in the box and 90% within bars
+the simulation labels are on the y axis
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-from n_dice_monte import sim_max, xqrt_plot, DSize
+from n_dice_monte import sim_max, xbox_plot, DSize
 
 #how many iterations to run simulation
-SIM_SIZE = 100000
+SIM_SIZE = 1000
 
 #minimum and maximum values representable within simulation data
 MAX_VAL = DSize.D20 + DSize.D6
@@ -61,7 +61,7 @@ sim_name = np.delete(sim_name, 0)
 
 _fig, ax = plt.subplots()
 
-ax = xqrt_plot(sim_data, MAX_VAL, MIN_VAL, sim_name)
+ax = xbox_plot(sim_data, MAX_VAL, MIN_VAL, sim_name)
 ax.axvline(x=20, color="grey", linestyle=":")
 
 plt.show()
