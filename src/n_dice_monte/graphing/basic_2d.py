@@ -118,7 +118,7 @@ def xqrt_plot(sim_data, max_val, min_val=1, name=("",)):
     plot_data = plot_data[:, plot_data[0].argsort()]
 
     #adjust name list to reflect sorted order
-    #name = name[sort_order]
+    name = name[sort_order]
 
     _fig, ax = plt.subplots()
 

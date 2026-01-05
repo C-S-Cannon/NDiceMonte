@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from n_dice_monte import sim_max, xqrt_plot, DSize
 
 #how many iterations to run simulation
-SIM_SIZE = 10000
+SIM_SIZE = 1000
 
 #minimum and maximum values representable within simulation data
 MAX_VAL = DSize.D20 + DSize.D6
@@ -18,16 +18,18 @@ MIN_VAL = 0
 #array of SIM_SIZE length filled with MIN_VAL
 SIM_MIN = np.full(SIM_SIZE, MIN_VAL)
 
-#names of simulations
-sim_list = np.array(["2d6 difficulty", "flat roll", "1d6 accuracy"])
+#array header for simulation names
+sim_name = np.array([""])
 
-#create header array
+#array header for simulation data
 sim_data = np.full(SIM_SIZE, -1)
 
 #create a loop to iterate simulation
 for d20 in range(1,3):
-    #create d20 simulations without accuracy
+    #create d20 simulations without accuracy or difficulty
     sim_data = np.vstack((sim_data, sim_max(SIM_SIZE, DSize.D20, d20)))
+    #append simulation name to end of array
+    sim_name = np.append(sim_name, f"{d20}d20 flat roll")
 
     #vertically append simulations with accuracy
     for accuracy in range(1,4):
@@ -36,6 +38,8 @@ for d20 in range(1,3):
         #project accuracy
         sim_data[sim_data.shape[0]-1] = (
             sim_data[sim_data.shape[0]-1] + sim_max(SIM_SIZE, DSize.D6, accuracy))
+        #append simulation name
+        sim_name = np.append(sim_name, f"{d20}d20 +{accuracy}accuracy")
 
     #vertically append simulations with difficulty
     for difficulty in range(1,4):
@@ -43,14 +47,18 @@ for d20 in range(1,3):
         sim_data = np.vstack((sim_data, sim_max(SIM_SIZE, DSize.D20, d20)))
         #project difficulty
         sim_data[sim_data.shape[0]-1] = (
-        sim_data[sim_data.shape[0]-1] - sim_max(SIM_SIZE, DSize.D6, accuracy))
+        sim_data[sim_data.shape[0]-1] - sim_max(SIM_SIZE, DSize.D6, difficulty))
+        #append simulation name
+        sim_name = np.append(sim_name, f"{d20}d20 +{difficulty}difficulty")
 
 #trim simulation header
 sim_data = np.delete(sim_data, 0, 0)
+#trim simulation names header
+sim_name = np.delete(sim_name, 0)
 
 _fig, ax = plt.subplots()
 
-ax = xqrt_plot(sim_data, MAX_VAL, MIN_VAL, sim_list)
+ax = xqrt_plot(sim_data, MAX_VAL, MIN_VAL, sim_name)
 ax.axvline(x=20, color="grey", linestyle=":")
 
 plt.show()
