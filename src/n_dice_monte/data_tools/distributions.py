@@ -20,8 +20,3 @@ def am_array(sim_data):
         means[x]=np.mean(sim_data[x])
 
     return means
-
-def qrt_low(sim_data):
-    """
-    return an array of lower bound quartiles of a set of data
-    """
