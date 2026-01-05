@@ -99,3 +99,26 @@ def layer_hist(sim_data, max_val, min_val=1, style='stepfilled',
     ax.set_xticks(minor_ticks(max_val), minor=True)
 
     return ax
+
+def xqrt_plot(sim_data, max_val, min_val=1, name=("",)):
+    """
+    plot a series of horizontal bars representing the quartile distribution of the dice
+    """
+
+    #calculate the arithmatic mean, lower, and higher quartiles of the sim data
+    means = np.mean(sim_data, axis=1)
+    qrt_low = np.quantile(sim_data, 0.25, axis=1)
+    qrt_high = np.quantile(sim_data, 0.75, axis=1)
+
+    #create array for plot data
+    plot_data = np.vstack((means, qrt_low, qrt_high))
+
+    #sort dataset by mean and store sorting indices
+    sort_order = plot_data[0].argsort()
+    plot_data = plot_data[:, plot_data[0].argsort()]
+
+    _fig, ax = plt.subplots()
+
+    _bars = ax.plt.errorbar(plot_data[0], np.arange(1, np.shape(plot_data)[1]+1))
+
+    return ax
