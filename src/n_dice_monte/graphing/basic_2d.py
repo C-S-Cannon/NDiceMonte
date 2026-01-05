@@ -139,7 +139,7 @@ def xbox_plot(sim_data, max_val, min_val=1, name=("",)):
     _fig, ax = plt.subplots()
 
     #generate boxplot
-    ax.boxplot(sim_data, sym='', orientation='horizontal')
+    ax.boxplot(sim_data, sym='', orientation='horizontal', notch=True)
 
     #set x ticks
     ax.set_xticks(major_ticks(max_val))

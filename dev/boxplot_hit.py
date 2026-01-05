@@ -1,6 +1,9 @@
 """
 create a boxplot showing the a mean/quartile distribution in the box and 90% within bars
 the simulation labels are on the y axis
+
+matplot boxplot demo link
+https://matplotlib.org/stable/gallery/statistics/boxplot_demo.html
 """
 
 import numpy as np
