@@ -19,7 +19,7 @@ fig, ax = plt.subplots()
 
 ax = histogram(sim_arr, DICE_FACE)
 ax.set_title('6d20 Maxpool Distribution')
-ax.legend(title="Mean is {:.2f}".format(avg), loc='upper left', reverse=True)
+ax.legend(title=f"Mean is {avg}", loc='upper left', reverse=True)
 
 #plt.savefig("./dev/six_20s.jpg")
 plt.show()

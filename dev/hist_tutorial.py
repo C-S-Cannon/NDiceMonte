@@ -1,3 +1,7 @@
+"""
+a snippet of histogram tutorial code from the matplot doc site
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -7,23 +11,23 @@ from matplotlib.ticker import PercentFormatter
 # Create a random number generator with a fixed seed for reproducibility
 rng = np.random.default_rng(19680801)
 
-N_points = 100000
-n_bins = 20
+N_POINTS = 100000
+N_BINS = 20
 
 # Generate two normal distributions
-dist1 = rng.standard_normal(N_points)
-dist2 = 0.4 * rng.standard_normal(N_points) + 5
+dist1 = rng.standard_normal(N_POINTS)
+dist2 = 0.4 * rng.standard_normal(N_POINTS) + 5
 
 fig, axs = plt.subplots(1, 2, sharey=True, tight_layout=True)
 
 # We can set the number of bins with the *bins* keyword argument.
-axs[0].hist(dist1, bins=n_bins)
-axs[1].hist(dist2, bins=n_bins)
+axs[0].hist(dist1, bins=N_BINS)
+axs[1].hist(dist2, bins=N_BINS)
 
 fig, axs = plt.subplots(1, 2, tight_layout=True)
 
 # N is the count in each bin, bins is the lower-limit of the bin
-N, bins, patches = axs[0].hist(dist1, bins=n_bins)
+N, bins, patches = axs[0].hist(dist1, bins=N_BINS)
 
 # We'll color code by height, but you could use any scalar
 fracs = N / N.max()
@@ -37,7 +41,7 @@ for thisfrac, thispatch in zip(fracs, patches):
     thispatch.set_facecolor(color)
 
 # We can also normalize our inputs by the total number of counts
-axs[1].hist(dist1, bins=n_bins, density=True)
+axs[1].hist(dist1, bins=N_BINS, density=True)
 
 # Now we format the y-axis to display percentage
 axs[1].yaxis.set_major_formatter(PercentFormatter(xmax=1))

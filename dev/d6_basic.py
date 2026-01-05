@@ -17,7 +17,7 @@ avg = np.mean(sim_arr)
 fig, ax = plt.subplots()
 
 ax = histogram(sim_arr, DICE_SIZE)
-ax.legend(title="Mean is {:.2f}".format(avg), loc='upper left', reverse=True)
+ax.legend(title=f"Mean is {avg}", loc='upper left', reverse=True)
 ax.set_title('Basic d6 distribution')
 
 plt.show()
