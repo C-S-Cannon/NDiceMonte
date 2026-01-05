@@ -209,3 +209,6 @@ __marimo__/
 #plot images
 dev/*.png
 dev/*.jpg
+
+#scratchpad
+dev/scratchpad.py
