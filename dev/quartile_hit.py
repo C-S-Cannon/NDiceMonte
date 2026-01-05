@@ -15,6 +15,9 @@ SIM_SIZE = 1000
 MAX_VAL = DSize.D20 + DSize.D6
 MIN_VAL = 0
 
+#array of d20 combinations to simulate
+D20_COMB = [1,2,4]
+
 #array of SIM_SIZE length filled with MIN_VAL
 SIM_MIN = np.full(SIM_SIZE, MIN_VAL)
 
@@ -25,11 +28,11 @@ sim_name = np.array([""])
 sim_data = np.full(SIM_SIZE, -1)
 
 #create a loop to iterate simulation
-for d20 in range(1,3):
+for d20 in D20_COMB:
     #create d20 simulations without accuracy or difficulty
     sim_data = np.vstack((sim_data, sim_max(SIM_SIZE, DSize.D20, d20)))
     #append simulation name to end of array
-    sim_name = np.append(sim_name, f"{d20}d20 flat roll")
+    sim_name = np.append(sim_name, f"{d20}d20 flat")
 
     #vertically append simulations with accuracy
     for accuracy in range(1,4):
@@ -39,7 +42,7 @@ for d20 in range(1,3):
         sim_data[sim_data.shape[0]-1] = (
             sim_data[sim_data.shape[0]-1] + sim_max(SIM_SIZE, DSize.D6, accuracy))
         #append simulation name
-        sim_name = np.append(sim_name, f"{d20}d20 +{accuracy}accuracy")
+        sim_name = np.append(sim_name, f"{d20}d20 +{accuracy} acc")
 
     #vertically append simulations with difficulty
     for difficulty in range(1,4):
@@ -49,7 +52,7 @@ for d20 in range(1,3):
         sim_data[sim_data.shape[0]-1] = (
         sim_data[sim_data.shape[0]-1] - sim_max(SIM_SIZE, DSize.D6, difficulty))
         #append simulation name
-        sim_name = np.append(sim_name, f"{d20}d20 +{difficulty}difficulty")
+        sim_name = np.append(sim_name, f"{d20}d20 +{difficulty} dif")
 
 #trim simulation header
 sim_data = np.delete(sim_data, 0, 0)
