@@ -29,14 +29,14 @@ def major_ticks(max_val):
 
     return ticks
 
-def minor_ticks(max_val):
+def minor_ticks(max_val, min_val=1):
     """
     accepts the maximum value of a histogram and returns an array of appropriate minor ticks
     """
 
     ticks = np.zeros(max_val)
     for x in range(max_val):
-        ticks[x] = x+1
+        ticks[x] = min_val + x
 
     return ticks
 
@@ -96,7 +96,7 @@ def layer_hist(sim_data, max_val, min_val=1, style='stepfilled',
     ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1))
 
     ax.set_xticks(major_ticks(max_val))
-    ax.set_xticks(minor_ticks(max_val), minor=True)
+    ax.set_xticks(minor_ticks(max_val, min_val), minor=True)
 
     return ax
 
@@ -107,18 +107,26 @@ def xqrt_plot(sim_data, max_val, min_val=1, name=("",)):
 
     #calculate the arithmatic mean, lower, and higher quartiles of the sim data
     means = np.mean(sim_data, axis=1)
-    qrt_low = np.quantile(sim_data, 0.25, axis=1)
-    qrt_high = np.quantile(sim_data, 0.75, axis=1)
+    qrt_low = means - np.quantile(sim_data, 0.25, axis=1)
+    qrt_high = np.quantile(sim_data, 0.75, axis=1) - means
 
-    #create array for plot data
+    #create array for plot data in order to sort quartiles by means
     plot_data = np.vstack((means, qrt_low, qrt_high))
 
     #sort dataset by mean and store sorting indices
     sort_order = plot_data[0].argsort()
     plot_data = plot_data[:, plot_data[0].argsort()]
 
+    #adjust name list to reflect sorted order
+    #name = name[sort_order]
+
     _fig, ax = plt.subplots()
 
-    _bars = ax.plt.errorbar(plot_data[0], np.arange(1, np.shape(plot_data)[1]+1))
+    _bars = ax.errorbar(plot_data[0], np.arange(1, plot_data.shape[1]+1),
+        xerr=np.delete(plot_data, 0, 0), fmt='d')
+
+    #set x ticks
+    ax.set_xticks(major_ticks(max_val))
+    ax.set_xticks(minor_ticks(max_val, min_val), minor=True)
 
     return ax
