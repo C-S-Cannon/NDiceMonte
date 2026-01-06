@@ -20,3 +20,13 @@ def am_array(sim_data):
         means[x]=np.mean(sim_data[x])
 
     return means
+
+def mean_last(sim_data):
+    """
+    calculate the mean of the last row in an ndarray
+    """
+    #calculate indice of the last row
+    indice = sim_data.shape[0]-1
+    mean = np.mean(indice)
+
+    return mean
