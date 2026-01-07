@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from n_dice_monte import sim_max, xbox_plot, DSize
 
 #how many iterations to run simulation
-SIM_SIZE = 30000
+SIM_SIZE = 3000000
 
 #minimum and maximum values representable within simulation data
 MAX_VAL = DSize.D20 + DSize.D6
@@ -82,5 +82,4 @@ ax.axvline(x=20, color="grey", linestyle=":")
 fig.suptitle("Lancer Attack Roll Distributions")
 ax.set_title("Bar is mean, 50% of rolls are inside box, 90% are inside whiskers")
 
-plt.show()
-#plt.savefig("./dev/attack_roll_distribution.jpg")
+plt.savefig("./dev/attack_roll_distribution.jpg")
