@@ -27,7 +27,7 @@ d6_sim = np.vstack((d6_sim, sim_max(SIM_SIZE, D6_SIZE, mface=2)))
 #append the mean value to the names array
 names.append(f"1d6 overkill, AM={mean_last(d6_sim)}")
 #append color to colors array
-colors.append('xkcd:pink')
+colors.append('xkcd:perrywinkle')
 
 d6_sim = np.vstack((d6_sim, sim_max(SIM_SIZE, D6_SIZE, pool_size=2)))
 #append the mean value to the names array
