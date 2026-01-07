@@ -21,12 +21,12 @@ def am_array(sim_data):
 
     return means
 
-def mean_last(sim_data):
+def mean_last(sim_data, round_to=2):
     """
-    calculate the mean of the last row in an ndarray
+    calculate the mean of the last row in an ndarray, rounded to 2 decimals by default
     """
     #calculate indice of the last row
     indice = sim_data.shape[0]-1
-    mean = np.mean(indice)
+    mean = np.mean(sim_data[indice])
 
-    return mean
+    return round(mean, round_to)
