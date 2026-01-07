@@ -6,26 +6,27 @@ import matplotlib.pyplot as plt
 from matplotlib import ticker
 import numpy as np
 
-def major_ticks(max_val):
+def major_ticks(max_val, zero_excluded=True):
     """
     accepts the maximum value of a histogram and returns an array of appropriate major ticks
     """
 
     tick_count = 0
     if max_val<=6:
-        tick_count = max_val
+        tick_count = max_val + (0 if zero_excluded else 1)
     elif max_val<=30:
-        tick_count = max_val/2
+        tick_count = max_val/2 + (0 if zero_excluded else 1)
     elif max_val <=50:
-        tick_count = max_val/5
+        tick_count = max_val/5 + (0 if zero_excluded else 1)
     else:
-        tick_count = 10
+        tick_count = 10 + (0 if zero_excluded else 1)
 
     tick_count = int(tick_count)
     ticks = np.zeros(tick_count)
 
     for x in range(tick_count):
-        ticks[x] = int((x+1) * max_val / tick_count)
+        ticks[x] = int((x+(1 if zero_excluded else 0)) * max_val
+            / (tick_count if zero_excluded else tick_count-1))
 
     return ticks
 
@@ -131,18 +132,43 @@ def xqrt_plot(sim_data, max_val, min_val=1, name=("",)):
 
     return ax
 
-def xbox_plot(sim_data, max_val, min_val=1, name=("",)):
+def xbox_plot(sim_data, max_val, min_val=1, name=("",), colors=("",)):
     """
     a box and whisker plot with values ranging along the x axis
+    box represents 50% of the distribution
+    whiskers represent 90% of the distribution
     """
+
+    if np.min(sim_data) < 0:
+        zero_excluded = False
+    else:
+        zero_excluded = True
 
     _fig, ax = plt.subplots()
 
     #generate boxplot
-    ax.boxplot(sim_data, sym='', orientation='horizontal', notch=True)
+    bplot = ax.boxplot(np.transpose(sim_data), patch_artist=("" not in colors[0])
+        , whis=(5,95), sym='', orientation='horizontal')
 
     #set x ticks
-    ax.set_xticks(major_ticks(max_val))
+    ax.set_xticks(major_ticks(max_val, zero_excluded=zero_excluded))
     ax.set_xticks(minor_ticks(max_val, min_val), minor=True)
+
+    #set y ticks and labels
+    ax.set_yticks(minor_ticks(sim_data.shape[0]), labels=name)
+
+    #enable gridlines on y axis
+    ax.grid(which='major', axis='y')
+    #set lines behind boxes
+    ax.set_axisbelow(True)
+
+    #check if boxes are filled
+    if "" not in colors[0]:
+        #color in boxes
+        for patch, color in zip(bplot['boxes'], colors):
+            patch.set_facecolor(color)
+
+    #if there are negative values, set a vertical line at 0
+    ax.axvline(x=0, color="grey", linestyle="-")
 
     return ax
