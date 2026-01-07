@@ -147,7 +147,7 @@ def xbox_plot(sim_data, max_val, min_val=1, name=("",), colors=("",)):
     _fig, ax = plt.subplots()
 
     #generate boxplot
-    bplot = ax.boxplot(np.transpose(sim_data), patch_artist=("" not in colors[0])
+    bplot = ax.boxplot(np.transpose(sim_data), patch_artist=(colors[0] != "")
         , whis=(5,95), sym='', orientation='horizontal')
 
     #set x ticks
@@ -163,7 +163,7 @@ def xbox_plot(sim_data, max_val, min_val=1, name=("",), colors=("",)):
     ax.set_axisbelow(True)
 
     #check if boxes are filled
-    if "" not in colors[0]:
+    if colors[0] != "":
         #color in boxes
         for patch, color in zip(bplot['boxes'], colors):
             patch.set_facecolor(color)

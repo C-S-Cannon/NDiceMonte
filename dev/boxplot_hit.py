@@ -72,10 +72,12 @@ for d20 in D20_COMB:
 sim_data = np.delete(sim_data, 0, 0)
 #trim simulation names header
 sim_name = np.delete(sim_name, 0)
+#trim color header
+colors.pop(0)
 
 fig, ax = plt.subplots()
 
-ax = xbox_plot(sim_data, MAX_VAL, MIN_VAL, sim_name)
+ax = xbox_plot(sim_data, MAX_VAL, MIN_VAL, name=sim_name, colors=colors)
 ax.axvline(x=20, color="grey", linestyle=":")
 fig.suptitle("Lancer Attack Roll Distributions")
 ax.set_title("Bar is mean, 50% of rolls are inside box, 90% are inside whiskers")
