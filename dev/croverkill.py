@@ -9,7 +9,7 @@ import numpy as np
 from n_dice_monte import sim_max, histogram, mean_last
 
 #plt.rcParams['text.usetex'] = True
-SIM_SIZE = 500000
+SIM_SIZE = 5000000
 D6_SIZE = 6
 D20_SIZE = 20
 
@@ -52,5 +52,4 @@ ax = histogram(np.transpose(d6_sim), (D6_SIZE),style='bar', colors=colors, name=
 ax.legend(loc='upper left')
 ax.set_title('Distribution of 1d6 Damage')
 
-plt.show()
 plt.savefig("./dev/damage.jpg")
