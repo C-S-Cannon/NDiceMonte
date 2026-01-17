@@ -25,12 +25,12 @@ class Dice(object):
         roll one or more dice as part of a pool, then return results as a numpy array
         """
 
-        results = np.array(dice_pool) #construct array to hold dice pool results
+        results = np.zeros(dice_pool) #construct array to hold dice pool results
 
         for x in range(dice_pool): #fill dice pool
-            results[x] = random.randint(1,self.dice_size)
+            results[x] = random.randint(self.min_face, self.dice_size)
 
-            return results
+        return results
 
     def roll_max(self, dice_pool = 1):
         """
