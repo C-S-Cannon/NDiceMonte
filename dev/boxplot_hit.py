@@ -82,4 +82,5 @@ ax.axvline(x=20, color="grey", linestyle=":")
 fig.suptitle("Lancer Attack Roll Distributions")
 ax.set_title("Bar is mean, 50% of rolls are inside box, 90% are inside whiskers")
 
-plt.savefig("./dev/attack_roll_distribution.jpg")
+plt.show()
+#plt.savefig("./dev/attack_roll_distribution.jpg")
